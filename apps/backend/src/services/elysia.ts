@@ -4,7 +4,11 @@ import { bearer } from '@elysiajs/bearer'
 import { cors } from '@elysiajs/cors'
 import { staticPlugin } from '@elysiajs/static'
 import { swagger } from '@elysiajs/swagger'
-import { Elysia } from 'elysia'
+import {
+  PrismaClientKnownRequestError,
+  PrismaClientUnknownRequestError,
+} from '@prisma/client/runtime/client'
+import { Elysia, ElysiaCustomStatusResponse, status } from 'elysia'
 
 export const app = new Elysia()
   .use(
@@ -31,6 +35,60 @@ export const app = new Elysia()
   .use(bearer())
   .use(cors())
   .use(staticPlugin())
+  .onError((context) => {
+    const { code, error } = context
+
+    if (error instanceof ElysiaCustomStatusResponse) {
+      // 补充 data 为 null
+      if (!error.response.data) {
+        error.response.data = null
+      }
+      return error
+    }
+
+    if (code === 'VALIDATION') {
+      if (error.type === 'response') {
+        return status(422, {
+          message: `后端返回数据校验未通过, 请联系管理员`,
+          data: {
+            ...(config.NODE_ENV === 'development' ? { errors: error.all } : null),
+            type: error.type,
+          },
+        })
+      }
+
+      return status(422, {
+        message: `请求参数校验未通过`,
+        data: {
+          ...(config.NODE_ENV === 'development' ? { errors: error.all } : null),
+          type: error.type,
+        },
+      })
+    }
+
+    if (code === 'NOT_FOUND') {
+      return status(404, { message: '页面没有找到', data: null })
+    }
+
+    if (code === 'PARSE') {
+      return status(400, { message: '参数解析错误', data: null })
+    }
+
+    if (
+      error instanceof PrismaClientUnknownRequestError ||
+      error instanceof PrismaClientKnownRequestError
+    ) {
+      return status(422, {
+        message: '数据库错误',
+        data: { ...(config.NODE_ENV === 'development' ? { code, error } : null) },
+      })
+    }
+
+    return status(500, {
+      message: '服务器内部错误',
+      data: { ...(config.NODE_ENV === 'development' ? { code, error } : null) },
+    })
+  })
   .use(userModule)
 
 export async function initElysia() {
