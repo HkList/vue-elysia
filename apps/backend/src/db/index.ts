@@ -2,8 +2,9 @@ import { config } from '$/config.ts'
 import { SQL } from 'bun'
 import { drizzle } from 'drizzle-orm/bun-sql'
 
-export const client = new SQL(config.DATABASE_URL)
+export const Client = new SQL(config.DATABASE_URL)
 
-export const db = drizzle({ client })
+export const Drizzle = drizzle({ client: Client })
 
-export { tables } from '$/db/schema.ts'
+export { Tables } from '$/db/schema.ts'
+export { Schemas } from '$/db/typebox.ts'

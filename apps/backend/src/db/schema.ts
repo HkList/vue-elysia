@@ -1,12 +1,17 @@
-import { integer, pgTable, varchar } from 'drizzle-orm/pg-core'
+import { integer, pgTable, timestamp, varchar } from 'drizzle-orm/pg-core'
 
-export const usersTable = pgTable('users', {
+export const User = pgTable('users', {
   id: integer().primaryKey().generatedAlwaysAsIdentity(),
   name: varchar({ length: 255 }).notNull(),
   age: integer().notNull(),
   email: varchar({ length: 255 }).notNull().unique(),
+  createdAt: timestamp().notNull().defaultNow(),
+  updatedAt: timestamp()
+    .notNull()
+    .defaultNow()
+    .$onUpdate(() => new Date()),
 })
 
-export const tables = {
-  usersTable,
+export const Tables = {
+  User,
 } as const
