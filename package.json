@@ -2,7 +2,7 @@
   "name": "vue-elysia",
   "version": "1.0.0",
   "workspaces": [
-    "apps/*"
+    "apps/backend"
   ],
   "scripts": {
     "dev": "concurrently -k \"bun run --filter * dev\"",
@@ -10,14 +10,10 @@
     "preview": "concurrently -k \"bun run --filter * preview\"",
     "lint": "concurrently -k \"bun run --filter * lint\"",
     "lint:fix": "concurrently -k \"bun run --filter * lint --fix\"",
-    "typecheck": "concurrently -k \"bun run --filter * typecheck\"",
-    "prisma": "bun run --elide-lines=0 --filter backend prisma"
+    "typecheck": "concurrently -k \"bun run --filter * typecheck\""
   },
   "devDependencies": {
     "@types/bun": "latest",
     "concurrently": "^9.2.1"
-  },
-  "dependencies": {
-    "bullmq": "^5.66.5"
   }
 }

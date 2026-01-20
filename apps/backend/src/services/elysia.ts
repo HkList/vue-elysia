@@ -4,10 +4,6 @@ import { bearer } from '@elysiajs/bearer'
 import { cors } from '@elysiajs/cors'
 import { staticPlugin } from '@elysiajs/static'
 import { swagger } from '@elysiajs/swagger'
-import {
-  PrismaClientKnownRequestError,
-  PrismaClientUnknownRequestError,
-} from '@prisma/client/runtime/client'
 import { Elysia, ElysiaCustomStatusResponse, status } from 'elysia'
 
 export const app = new Elysia()
@@ -72,16 +68,6 @@ export const app = new Elysia()
 
     if (code === 'PARSE') {
       return status(400, { message: '参数解析错误', data: null })
-    }
-
-    if (
-      error instanceof PrismaClientUnknownRequestError ||
-      error instanceof PrismaClientKnownRequestError
-    ) {
-      return status(422, {
-        message: '数据库错误',
-        data: { ...(config.NODE_ENV === 'development' ? { code, error } : null) },
-      })
     }
 
     return status(500, {

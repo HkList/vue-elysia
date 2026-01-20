@@ -13,8 +13,8 @@
     "skipLibCheck": true,
     "paths": {
       "$/*": ["./src/*"],
-      "$generated/prisma_client": ["./src/prisma/generated/client.ts"]
+      "$db": ["./src/db/index.ts"]
     }
   },
-  "include": ["src", "prisma.config.ts"]
+  "include": ["src", "drizzle.config.ts"]
 }

@@ -3,13 +3,7 @@ import eslintConfigPrettier from 'eslint-config-prettier/flat'
 
 export default antfu(
   {
-    ignores: [
-      '**/prisma/generated/**',
-      '**/node_modules/**',
-      '**/dist/**',
-      '**/bak/**',
-      'tsconfig.json',
-    ],
+    ignores: ['**/node_modules/**', '**/dist/**', '**/bak/**', 'tsconfig.json'],
   },
   {
     files: ['**/*.js', '**/*.ts'],
