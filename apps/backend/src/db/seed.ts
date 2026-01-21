@@ -1,4 +1,4 @@
-import { Drizzle, Tables } from '$/db/index.ts'
+import { Drizzle, Tables } from '@backend/db'
 
 async function main() {
   await Drizzle.insert(Tables.User)

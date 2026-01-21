@@ -1,4 +1,4 @@
-import { Schemas } from '$db'
+import { Schemas } from '@backend/db'
 import { t } from 'elysia'
 
 export const UserModel = {

@@ -20,4 +20,16 @@ export default defineConfigWithVueTs(
   vueTsConfigs.recommended,
 
   skipFormatting,
+  {
+    rules: {
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          varsIgnorePattern: '^_',
+          argsIgnorePattern: '^_',
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+    },
+  },
 )

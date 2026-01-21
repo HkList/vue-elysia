@@ -1,5 +1,5 @@
-import { config } from '$/config.ts'
-import { userModule } from '$/modules/index.ts'
+import { config } from '@backend/config.ts'
+import { userModule } from '@backend/modules/index.ts'
 import { bearer } from '@elysiajs/bearer'
 import { cors } from '@elysiajs/cors'
 import { staticPlugin } from '@elysiajs/static'

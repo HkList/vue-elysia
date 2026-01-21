@@ -1,5 +1,5 @@
 import process from 'node:process'
-import { app } from '$/services/elysia.ts'
+import { app } from '@backend/services/elysia.ts'
 
 export function initExceptionHandler() {
   const signals = ['SIGINT', 'SIGTERM']

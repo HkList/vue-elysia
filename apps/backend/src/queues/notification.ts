@@ -1,4 +1,4 @@
-import { config } from '$/config.ts'
+import { config } from '@backend/config.ts'
 import { Queue, Worker } from 'bullmq'
 
 export interface EmailJobData {

@@ -1,1 +1,1 @@
-export { userModule } from '$/modules/user/index.ts'
+export { userModule } from '@backend/modules/user/index.ts'

@@ -1,4 +1,4 @@
-import { config } from '$/config.ts'
+import { config } from '@backend/config.ts'
 import { defineConfig } from 'drizzle-kit'
 import 'dotenv/config'
 

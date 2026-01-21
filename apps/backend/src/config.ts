@@ -1,5 +1,14 @@
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import dotenv from 'dotenv'
 import env from 'env-var'
-import 'dotenv/config'
+
+const __dirname = dirname(fileURLToPath(import.meta.url))
+
+dotenv.config({
+  path: resolve(__dirname, '../.env'),
+  quiet: true,
+})
 
 export const config = {
   NODE_ENV: env.get('NODE_ENV').default('development').asEnum(['production', 'development']),
@@ -10,5 +19,5 @@ export const config = {
   REDIS_HOST: env.get('REDIS_HOST').default('localhost').asString(),
   REDIS_PORT: env.get('REDIS_PORT').default(6379).asPortNumber(),
 
-  OPENAPI_PATH: env.get('OPENAPI_PATH').default('/openapi').asString()
+  OPENAPI_PATH: env.get('OPENAPI_PATH').default('/openapi').asString(),
 }

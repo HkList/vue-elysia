@@ -8,7 +8,6 @@ export default antfu(
   {
     files: ['**/*.js', '**/*.ts'],
     rules: {
-      'node/prefer-global/process': ['error', 'never'],
       'no-console': 'off',
       'antfu/no-top-level-await': 'off',
       'unused-imports/no-unused-vars': [

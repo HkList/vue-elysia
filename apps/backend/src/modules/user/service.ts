@@ -1,4 +1,4 @@
-import { Drizzle, Tables } from '$db'
+import { Drizzle, Tables } from '@backend/db'
 import { status } from 'elysia'
 
 export class UserService {

@@ -13,7 +13,6 @@
     "typecheck": "concurrently -k \"bun run --filter * typecheck\""
   },
   "devDependencies": {
-    "@types/bun": "latest",
     "concurrently": "^9.2.1"
   }
 }

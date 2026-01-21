@@ -1,5 +1,5 @@
-import { UserModel } from '$/modules/user/model.ts'
-import { UserService } from '$/modules/user/service.ts'
+import { UserModel } from '@backend/modules/user/model.ts'
+import { UserService } from '@backend/modules/user/service.ts'
 import { Elysia } from 'elysia'
 
 export const userModule = new Elysia({ prefix: '/users' }).get(

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { api } from '@/api'
-import { Schemas } from '$db'
+import { api } from '@frontend/api'
+import { Schemas } from '@backend/db'
 
 const users = ref<(typeof Schemas.UserSchema.static)[]>([])
 
