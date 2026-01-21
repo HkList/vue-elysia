@@ -2,10 +2,10 @@
   "name": "vue-elysia",
   "version": "1.0.0",
   "workspaces": [
-    "apps/backend"
+    "apps/*"
   ],
   "scripts": {
-    "dev": "concurrently -k \"bun run --filter * dev\"",
+    "dev": "concurrently -k \"bun --cwd apps/backend dev\" \"bun --cwd apps/frontend-vue dev\"",
     "build": "concurrently -k \"bun run --filter * build\"",
     "preview": "concurrently -k \"bun run --filter * preview\"",
     "lint": "concurrently -k \"bun run --filter * lint\"",

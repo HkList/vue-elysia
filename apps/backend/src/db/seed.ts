@@ -1,8 +1,7 @@
-import { db, tables } from '$/db/index.ts'
+import { Drizzle, Tables } from '$/db/index.ts'
 
 async function main() {
-  await db
-    .insert(tables.usersTable)
+  await Drizzle.insert(Tables.User)
     .values([
       {
         name: 'Alice',
@@ -11,7 +10,7 @@ async function main() {
       },
     ])
     .onConflictDoUpdate({
-      target: [tables.usersTable.email],
+      target: [Tables.User.email],
       set: {
         name: 'Alice',
         age: 28,

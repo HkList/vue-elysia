@@ -4,6 +4,7 @@ import { bearer } from '@elysiajs/bearer'
 import { cors } from '@elysiajs/cors'
 import { staticPlugin } from '@elysiajs/static'
 import { swagger } from '@elysiajs/swagger'
+import { DrizzleQueryError } from 'drizzle-orm/errors'
 import { Elysia, ElysiaCustomStatusResponse, status } from 'elysia'
 
 export const app = new Elysia()
@@ -70,12 +71,23 @@ export const app = new Elysia()
       return status(400, { message: '参数解析错误', data: null })
     }
 
+    console.log(error)
+
+    if (error instanceof DrizzleQueryError) {
+      return status(500, {
+        message: '数据库错误',
+        data: { ...(config.NODE_ENV === 'development' ? { code, error } : null) },
+      })
+    }
+
     return status(500, {
       message: '服务器内部错误',
       data: { ...(config.NODE_ENV === 'development' ? { code, error } : null) },
     })
   })
   .use(userModule)
+
+export type App = typeof app
 
 export async function initElysia() {
   return new Promise<void>((resolve) => {

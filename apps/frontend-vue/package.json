@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "frontend-vue",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -8,19 +8,17 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
+    "build": "run-p typecheck \"build-only {@}\" --",
     "preview": "vite preview",
-    "lint": "run-s lint:oxlint lint:eslint",
-    "lint:oxlint": "oxlint .",
-    "lint:eslint": "eslint . --cache",
-    "lint:fix": "run-s lint:fix:oxlint lint:fix:eslint",
-    "lint:fix:eslint": "eslint . --fix",
-    "lint:fix:oxlint": "oxlint . --fix --cache",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --fix --cache",
     "typecheck": "vue-tsc --build",
-    "format": "prettier --write --experimental-cli src/",
-    "build-only": "vite build"
+    "build-only": "vite build",
+    "format": "prettier --write --experimental-cli src/"
   },
   "dependencies": {
+    "@elysiajs/eden": "^1.4.6",
+    "elysia": "^1.4.22",
     "pinia": "^3.0.4",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4"
@@ -34,15 +32,12 @@
     "@vue/eslint-config-typescript": "^14.6.0",
     "@vue/tsconfig": "^0.8.1",
     "eslint": "^9.39.2",
-    "eslint-plugin-n": "^17.23.2",
-    "eslint-plugin-oxlint": "~1.38.0",
     "eslint-plugin-vue": "~10.6.2",
     "jiti": "^2.6.1",
     "npm-run-all2": "^8.0.4",
-    "oxlint": "~1.38.0",
     "prettier": "3.7.4",
     "typescript": "~5.9.3",
-    "vite": "beta",
+    "vite": "^7.3.0",
     "vite-plugin-vue-devtools": "^8.0.5",
     "vue-tsc": "^3.2.2"
   }
