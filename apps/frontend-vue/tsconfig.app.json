@@ -7,7 +7,7 @@
     "paths": {
       "@frontend/*": ["./src/*"],
       "@backend/*": ["../backend/src/*"],
-      "@backend/db": ["../backend/src/db/index.ts"],
+      "@backend/db": ["../backend/src/database/index.ts"],
       "@backend/elysia": ["../backend/src/services/elysia.ts"]
     }
   }

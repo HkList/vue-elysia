@@ -13,7 +13,7 @@
     "skipLibCheck": true,
     "paths": {
       "@backend/*": ["./src/*"],
-      "@backend/db": ["./src/db/index.ts"]
+      "@backend/db": ["./src/database/index.ts"]
     }
   },
   "include": ["src", "drizzle.config.ts"]

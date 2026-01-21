@@ -1,11 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { join } from "node:path";
+import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
-  modules: ["@nuxt/eslint", "@nuxt/ui", "nuxt-elysia"],
+  modules: ["@nuxt/eslint", "@nuxt/ui"],
 
   devtools: {
     enabled: true,
@@ -14,16 +12,36 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"],
 
   alias: {
-    "@backend/elysia": resolve(__dirname, "../backend/src/services/elysia.ts"),
-    "@backend": resolve(__dirname, "../backend/src"),
-    "@backend/db": resolve(__dirname, "../backend/src/db/index.ts"),
+    "@backend/db": join(
+      import.meta.dirname,
+      "../backend/src/database/index.ts",
+    ),
+    "@backend/elysia": join(
+      import.meta.dirname,
+      "../backend/src/services/elysia.ts",
+    ),
+    "@backend": join(import.meta.dirname, "../backend/src"),
   },
 
   routeRules: {
     "/": { prerender: true },
   },
 
+  devServer: {
+    port: 4000,
+  },
+
   compatibilityDate: "2025-01-15",
+
+  nitro: {
+    preset: "bun",
+    devProxy: {
+      "/api": {
+        target: "http://localhost:3000",
+        changeOrigin: true,
+      },
+    },
+  },
 
   typescript: {
     tsConfig: {
@@ -31,24 +49,11 @@ export default defineNuxtConfig({
         allowImportingTsExtensions: true,
         baseUrl: ".",
         paths: {
-          "@backend/*": ["../backend/src/*"],
-          "@backend/db": ["../backend/src/db/index.ts"],
+          "@backend/db": ["../backend/src/database/index.ts"],
           "@backend/elysia": ["../backend/src/services/elysia.ts"],
+          "@backend/*": ["../backend/src/*"],
         },
       },
     },
-  },
-
-  eslint: {
-    config: {
-      stylistic: {
-        commaDangle: "never",
-        braceStyle: "1tbs",
-      },
-    },
-  },
-
-  nuxtElysia: {
-    module: "~/api.ts",
   },
 });

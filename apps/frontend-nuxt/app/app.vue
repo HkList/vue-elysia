@@ -1,4 +1,16 @@
-<script setup>
+<script lang="ts" setup>
+import { api } from "@/api/index.ts";
+import type { Schemas } from "@backend/db";
+
+const users = ref<(typeof Schemas.UserSchema.static)[]>([]);
+
+async function handleClick() {
+  const res = await api.users.get();
+  if (!res.error) {
+    users.value = res.data.data;
+  }
+}
+
 useHead({
   meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
   link: [{ rel: "icon", href: "/favicon.ico" }],
@@ -20,11 +32,6 @@ useSeoMeta({
   twitterImage: "https://ui.nuxt.com/assets/templates/nuxt/starter-light.png",
   twitterCard: "summary_large_image",
 });
-
-const { $api } = useNuxtApp();
-
-const users = await $api.users.get();
-console.log(users);
 </script>
 
 <template>
@@ -53,6 +60,11 @@ console.log(users);
     </UHeader>
 
     <UMain>
+      <UButton @click="handleClick">点击获取数据</UButton>
+      <p>
+        Users:
+        {{ users }}
+      </p>
       <NuxtPage />
     </UMain>
 

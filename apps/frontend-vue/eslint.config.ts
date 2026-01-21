@@ -22,7 +22,7 @@ export default defineConfigWithVueTs(
   skipFormatting,
   {
     rules: {
-      'unused-imports/no-unused-vars': [
+      '@typescript-eslint/no-unused-vars': [
         'warn',
         {
           varsIgnorePattern: '^_',
