@@ -1,0 +1,20 @@
+{
+  "name": "vue-elysia",
+  "version": "1.0.0",
+  "workspaces": ["apps/*"],
+  "scripts": {
+    "r": "bun run scripts/run-command.ts",
+    "dev": "bun run r dev backend,frontend-vue",
+    "build": "bun run r build backend,frontend-vue",
+    "preview": "bun run r preview backend,frontend-vue",
+    "lint": "bun run r lint backend,frontend-vue",
+    "lint:fix": "bun run r lint:fix backend,frontend-vue",
+    "typecheck": "bun run r typecheck backend,frontend-vue",
+    "drizzle": "bun run r drizzle-kit backend",
+    "seed": "bun run ./apps/backend/src/db/seed.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.6",
+    "concurrently": "^9.2.1"
+  }
+}

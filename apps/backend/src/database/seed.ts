@@ -1,19 +1,18 @@
-import { Drizzle, Tables } from '@backend/db'
+import { Drizzle, Schemas } from '@backend/db'
 
 async function main() {
-  await Drizzle.insert(Tables.User)
+  await Drizzle.insert(Schemas.User)
     .values([
       {
-        name: 'Alice',
-        age: 28,
-        email: 'alice@example.com',
+        username: 'admin',
+        password: await Bun.password.hash('admin_password'),
       },
     ])
     .onConflictDoUpdate({
-      target: [Tables.User.email],
+      target: [Schemas.User.username],
       set: {
-        name: 'Alice',
-        age: 28,
+        username: 'Alice',
+        password: await Bun.password.hash('admin_password'),
       },
     })
 

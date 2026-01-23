@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { api } from "@/api/index.ts";
-import type { Schemas } from "@backend/db";
+import type { TypeboxTypes } from "@backend/db";
 
-const users = ref<(typeof Schemas.UserSchema.static)[]>([]);
+const users = ref<TypeboxTypes["UserTypeboxSchemaType"][]>([]);
 
 async function handleClick() {
   const res = await api.users.get();

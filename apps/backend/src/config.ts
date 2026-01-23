@@ -1,23 +1,4 @@
-import process from 'node:process'
-import { env as _env } from '@backend/env.ts'
-import e from 'env-var'
-
-export interface EnvConfig {
-  NODE_ENV?: 'production' | 'development'
-  APP_PORT?: number
-
-  REDIS_HOST?: string
-  REDIS_PORT?: number
-
-  DATABASE_URL: string
-
-  OPENAPI_PATH?: string
-}
-
-const env = e.from({
-  ...process.env,
-  ...Object.fromEntries(Object.entries(_env).map(([key, value]) => [key, String(value)])),
-})
+import env from 'env-var'
 
 export const config = {
   NODE_ENV: env.get('NODE_ENV').default('development').asEnum(['production', 'development']),

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { api } from '@frontend/api'
-import { Schemas } from '@backend/db'
+import type { TypeboxTypes } from '@backend/db'
 
-const users = ref<(typeof Schemas.UserSchema.static)[]>([])
+const users = ref<TypeboxTypes['UserTypeboxSchemaType'][]>([])
 
 async function requestUsers() {
   const usersResponse = await api.users.get()

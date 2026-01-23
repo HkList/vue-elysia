@@ -7,7 +7,7 @@ export const userModule = new Elysia({ prefix: '/users' }).get(
   async () => await UserService.getAllUsers(),
   {
     response: {
-      200: UserModel.getAllUsers.success,
+      200: UserModel.getAllUsersSuccess,
     },
     detail: {
       summary: '获取所有用户',

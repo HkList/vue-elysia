@@ -1,7 +1,14 @@
+import type { TypeboxTypes } from '@backend/database/typebox.ts'
 import { config } from '@backend/config.ts'
-import { drizzle } from 'drizzle-orm/node-postgres'
+import { Relations } from '@backend/database/relations.ts'
+import { Schemas } from '@backend/database/schema.ts'
+import { Typeboxs } from '@backend/database/typebox.ts'
+import { drizzle } from 'drizzle-orm/bun-sql'
 
-export const Drizzle = drizzle(config.DATABASE_URL)
+const Drizzle = drizzle(config.DATABASE_URL, {
+  schema: Schemas,
+  relations: Relations,
+})
 
-export { Tables } from '@backend/database/schema.ts'
-export { Schemas } from '@backend/database/typebox.ts'
+export { Drizzle, Schemas, Typeboxs }
+export type { TypeboxTypes }
